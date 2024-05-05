@@ -17,7 +17,7 @@ class CommitHandler:
         self.headers = {'Authorization': f'token {token}'} if token else {}
         self.commits = []
         self.commit_num = commit_num
-
+        self.failed_requests = False
 
         self.fetch_commits()
 
@@ -33,6 +33,7 @@ class CommitHandler:
             return response.json()
         else:
             print(f"Failed to retrieve commit: {response.status_code} - {response.text}")
+            self.failed_requests = True
             return None
         
 
@@ -67,6 +68,7 @@ class CommitHandler:
 
             else:
                 print(f"Failed to retrieve commits: {response.status_code} - {response.text}")
+                self.failed_requests = True
                 break
 
     def frequent_developer_pair(self, non_unique_dev = False, on_modules=False):

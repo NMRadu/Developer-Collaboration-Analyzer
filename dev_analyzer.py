@@ -12,9 +12,10 @@ parser.add_argument("-r", "--repository", type=str, required=True, help='Reposit
 args = parser.parse_args()
 
 commitHandler = CommitHandler(args.repository, token = args.token, commit_num = args.commit_num)
-pairs = commitHandler.frequent_developer_pair(non_unique_dev = args.non_unique_dev, on_modules = args.modules)
 
-output_formatter = OutputFormatter()
-output_formatter.prettify_developer_pairs(pairs)
+if not commitHandler.failed_requests:    
+    pairs = commitHandler.frequent_developer_pair(non_unique_dev = args.non_unique_dev, on_modules = args.modules)
+    output_formatter = OutputFormatter()
+    output_formatter.prettify_developer_pairs(pairs)
 
 
