@@ -22,13 +22,13 @@ pip install requests
 # Usage
 Run the dev_analyzer.py script to analyze the GitHub repository. The script accepts the following command-line arguments:
 
--r or --repository: The full name of the GitHub repository in username/repository format (required).
--t or --token: (Optional) GitHub API token for authentication. Useful for repositories with many commits or for private repositories.
--non_unique_dev: Set to True to include non-unique developer pairs. If omitted, the flag defaults to False.
--modules: Set to True to analyze contributions at the module (directory) level rather than the file level.
--commit_num: (Optional) The number of recent commits to analyze. If not set then all of the commits will be considered
+- -r or --repository: The full name of the GitHub repository in username/repository format (required).
+- -t or --token: (Optional) GitHub API token for authentication. Useful for repositories with many commits or for private repositories.
+- -non_unique_dev: Set to True to include non-unique developer pairs. If omitted, the flag defaults to False.
+- -modules: Set to True to analyze contributions at the module (directory) level rather than the file level.
+- -commit_num: (Optional) The number of recent commits to analyze. If not set then all of the commits will be considered
 
-# explanation
+# Explanation
 To determine pairs of developers who most frequently contribute to the same files/modules in a GitHub repository, we first start requesting commit information from the repository (this is done in the `fetch_commit_details` method of the `CommitHandler` class). Following this, we determine how many times a pair of developers contribute to the same file/module and sort the list in descending order. Iterating through the sorted list, we take only pairs that are the most frequent collaborators for both developers will be included, however, if the `non_unique_dev` flag is set then pairs will be included if they are the most frequent for at least one of the developers (this is done in the `frequent_developer_pair` method of the `CommitHandler` class). Lastly, the list with the most frequent pairs is formatted and then printed (this is done in the `prettify_developer_pairs` method of the `OutputFormatter` class).
 
 
