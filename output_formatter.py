@@ -9,6 +9,10 @@ class OutputFormatter:
         
         :param pairs_list: list of tuples - Each tuple contains a pair of developer names and their collaboration count.
         """
+        if len(pairs_list) == 0:
+            print("No pairs have been found")
+            return
+
         max_length = max(len(dev) for pair in pairs_list for dev in pair[0])
         max_length = max(max_length, len("Developer Pair"), len("Count"))
 
